@@ -1,0 +1,18 @@
+#Mon Nov 28 14:08:54 IST 2022
+\!/=
+/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=
+/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
+/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.codegen.targetPlatform=17
+/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.compliance=17
+/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
+/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
+/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.release=enabled
+/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.source=17
+/instance/org.eclipse.jdt.launching/org.eclipse.jdt.launching.PREF_VM_XML=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<vmSettings defaultVM\="57,org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType13,1666858087524" defaultVMConnector\="">\r\n    <vmType id\="org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType">\r\n        <vm id\="1666502128718" name\="jre" path\="C\:\\Users\\viole\\.p2\\pool\\plugins\\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.4.v20220903-1038\\jre"/>\r\n        <vm id\="1666858087524" name\="jdk-11.0.16" path\="C\:\\Program Files\\Java\\jdk-11.0.16"/>\r\n    </vmType>\r\n</vmSettings>\r\n
+/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.formatterprofiles.version=22
+/instance/org.eclipse.ui.workbench/org.eclipse.ui.commands=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<org.eclipse.ui.commands/>
+@org.eclipse.jdt.core=3.31.0.v20220831-1439
+@org.eclipse.jdt.launching=3.19.700.v20220730-1850
+@org.eclipse.jdt.ui=3.27.0.v20220824-0714
+@org.eclipse.ui.workbench=3.126.0.v20220823-0718
+file_export_version=3.0
