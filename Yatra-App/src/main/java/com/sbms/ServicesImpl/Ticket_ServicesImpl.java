@@ -16,11 +16,11 @@ public class Ticket_ServicesImpl implements Ticket_ServicesI {
 
 		
 		/* Connecting to IRCTC-Application through WebClient */
-		String URL = "http://swapna:2000/sbms/irctc-updated/bookTicket";
+		String URL = "http://swapna:2000/sbms/irctc/bookTicket";
 		FinalTicketResponse finalTicketResponse = WebClient.create()
 				 .post()
 				 .uri(URL)
-//				 .headers(headers->headers.setBasicAuth("sekhar", "sekhar123"))
+				 .headers(headers->headers.setBasicAuth("yatra", "yatra123"))
 				 .bodyValue(ticketRequest)
 				 .retrieve()
 				 .bodyToMono(FinalTicketResponse.class)

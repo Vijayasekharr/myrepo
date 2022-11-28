@@ -145,7 +145,7 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 			) {
 				return new ResponseEntity<String>(
 						"    Hey Man !!!, You already updated the Boarding Station !!!, For Updating one more time, Please pass that Updated Ticket \n      By changing the Boarding Station in the Request Body."
-								+ " To get that updated Ticket Please CLICK on the following URL                                                    ***   /getTicket/"
+								+ " To get that updated Ticket Please CLICK on the following URL                                                ***   /sbms/irctc/getTicket/"
 								+ finalTicketResponse1.getPnr() + "   ***",
 						HttpStatus.BAD_REQUEST);
 			} else {

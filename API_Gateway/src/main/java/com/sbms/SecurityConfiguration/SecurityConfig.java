@@ -38,21 +38,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-//
-//		http.authorizeRequests().antMatchers("/deleteTicket/**").hasAnyRole("ADMIN").and()
-//			.authorizeRequests().antMatchers("/bookTicket").authenticated().and()
-//			.authorizeRequests().antMatchers("/home").permitAll().and()
-//			.authorizeRequests().antMatchers("/welcome").hasAnyRole("ADMIN").and()
-//			.authorizeRequests().antMatchers("/train_search").permitAll().and()
-//			.formLogin().and()
-//			.httpBasic().and()
-//			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+		http.authorizeRequests().antMatchers("/sbms/irctc/deleteTicket/**").hasAnyRole("ADMIN").and()
+			.authorizeRequests().antMatchers("/sbms/irctc/bookTicket").authenticated().and()
+//			.authorizeRequests().antMatchers("/sbms/irctc/home").permitAll().and()
+			.authorizeRequests().antMatchers("/sbms/irctc/welcome").hasAnyRole("ADMIN").and()
+//			.authorizeRequests().antMatchers("/sbms/irctc/train_search").permitAll().and()
+			.formLogin().and()
+			.httpBasic().and()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 	}
 

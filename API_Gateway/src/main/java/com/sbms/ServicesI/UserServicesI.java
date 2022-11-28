@@ -1,4 +1,4 @@
-package com.sbms.ServicessI;
+package com.sbms.ServicesI;
 
 import com.sbms.Entitys.User;
 

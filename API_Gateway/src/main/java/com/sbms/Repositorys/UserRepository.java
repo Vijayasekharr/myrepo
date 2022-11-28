@@ -9,10 +9,10 @@ import com.sbms.Entitys.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
 	
-	@Query(value = "select user_name from IRCTC_User_dtls", nativeQuery = true)
+	@Query(value = "select user_name from Gateway_User_dtls", nativeQuery = true)
 	public List<String> getAlluser_names();
 	
-	@Query(value = "select user_email from IRCTC_User_dtls", nativeQuery = true)
+	@Query(value = "select user_email from Gateway_User_dtls", nativeQuery = true)
 	public List<String> getAlluser_emails();
 	
 //	@Query(value = "select * from IRCTC_User_dtls where user_name=:user_name", nativeQuery = true)

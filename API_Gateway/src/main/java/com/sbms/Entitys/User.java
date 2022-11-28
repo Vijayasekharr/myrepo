@@ -18,7 +18,7 @@ import lombok.Data;
 @XmlRootElement
 @Data
 @Entity
-@Table(name = "IRCTC_User_dtls")
+@Table(name = "Gateway_User_dtls") 
 public class User {
 	
 	@Id

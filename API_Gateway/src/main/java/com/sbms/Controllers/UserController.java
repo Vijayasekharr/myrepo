@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sbms.Entitys.Role;
 import com.sbms.Entitys.User;
-import com.sbms.ServicessI.UserServicesI;
+import com.sbms.ServicesI.UserServicesI;
 
 @RestController
 public class UserController {

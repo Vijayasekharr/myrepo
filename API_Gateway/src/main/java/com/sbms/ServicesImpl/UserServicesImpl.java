@@ -1,4 +1,4 @@
-package com.sbms.ServicessImpl;
+package com.sbms.ServicesImpl;
 
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.sbms.Entitys.User;
 import com.sbms.Repositorys.UserRepository;
-import com.sbms.ServicessI.UserServicesI;
+import com.sbms.ServicesI.UserServicesI;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,6 +28,7 @@ public class UserServicesImpl implements UserServicesI {
 	public String saveUser(User user) {
 	
 		List<String> alluser_names = userRepository.getAlluser_names();
+		System.out.println("alluser_names :: "+alluser_names);
 		for (String string : alluser_names) {
 			if (string.equals(user.getUser_name())) {
 				return "The UserName :: " + user.getUser_name() + " is already Existed !!.. So, Please register with Another UserName ";
@@ -35,6 +36,7 @@ public class UserServicesImpl implements UserServicesI {
 		}
 		
 		List<String> alluser_emails = userRepository.getAlluser_emails();
+		System.out.println("alluser_emails :: "+alluser_emails);
 		for (String string : alluser_emails) {
 			if (string.equals(user.getUser_email())) {
 				return "The UserEmail :: " + user.getUser_email() + " is already Registered !!.. So, Please register with Another Email  ";

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
 	
 	@GetMapping("/home")
-	public ResponseEntity<String> home() {
-		return new ResponseEntity<String>("*** Home page of IRCTC APPLICATION ***", HttpStatus.OK);
+	public ResponseEntity<String> home(){
+		return new ResponseEntity<String>("*** Home of the API-Gateway ***",HttpStatus.OK);
 	}
 
 }

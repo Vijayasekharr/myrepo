@@ -17,7 +17,7 @@ public class Train_ServicesImpl implements Train_ServicesI{
 		
 	
 		/* Connecting to Train Application through WebClient */
-		String  URL = "http://swapna:2000/sbms/irctc-updated/train_search?from_station="+from_station+"&to_station="+to_station+"&date="+date;
+		String  URL = "http://swapna:2000/sbms/irctc/train_search?from_station="+from_station+"&to_station="+to_station+"&date="+date;
 		Availabe_Trains availabe_Trains = WebClient.create()
 												   .get()
 		                                           .uri(URL)
