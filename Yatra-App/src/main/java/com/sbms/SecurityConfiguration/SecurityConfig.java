@@ -1,7 +1,5 @@
 package com.sbms.SecurityConfiguration;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,8 +22,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
-	
-
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
@@ -35,11 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 
-		http.authorizeRequests().antMatchers("/sbms/irctc/deleteTicket/**").hasAnyRole("ADMIN").and()
-			.authorizeRequests().antMatchers("/sbms/irctc/bookTicket").authenticated().and()
-//			.authorizeRequests().antMatchers("/sbms/irctc/home").permitAll().and()
-			.authorizeRequests().antMatchers("/sbms/irctc/welcome").hasAnyRole("ADMIN").and()
-//			.authorizeRequests().antMatchers("/sbms/irctc/train_search").permitAll().and()
+		http.authorizeRequests().antMatchers("/bookTicket").authenticated().and()
+			.authorizeRequests().antMatchers("/train_search").permitAll().and()
 			.formLogin().and()
 			.httpBasic().and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
