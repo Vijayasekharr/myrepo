@@ -32,7 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 
 		http.authorizeRequests().antMatchers("/bookTicket").authenticated().and()
-			.authorizeRequests().antMatchers("/train_search").permitAll().and()
+			.authorizeRequests().antMatchers("/updateTicket").authenticated().and()
+			.authorizeRequests().antMatchers("/train_search").authenticated().and()
+			.authorizeRequests().antMatchers("/getTicket/**").authenticated().and()
 			.formLogin().and()
 			.httpBasic().and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

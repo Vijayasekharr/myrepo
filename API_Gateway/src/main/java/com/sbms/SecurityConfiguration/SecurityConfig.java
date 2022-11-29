@@ -37,6 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests().antMatchers("/sbms/irctc/deleteTicket/**").hasAnyRole("ADMIN").and()
 			.authorizeRequests().antMatchers("/sbms/irctc/bookTicket").authenticated().and()
+			.authorizeRequests().antMatchers("/sbms/irctc/updateTicket").authenticated().and()
+			.authorizeRequests().antMatchers("/sbms/irctc/getTicket/**").authenticated().and()
 //			.authorizeRequests().antMatchers("/sbms/irctc/home").permitAll().and()
 			.authorizeRequests().antMatchers("/sbms/irctc/welcome").hasAnyRole("ADMIN").and()
 //			.authorizeRequests().antMatchers("/sbms/irctc/train_search").permitAll().and()

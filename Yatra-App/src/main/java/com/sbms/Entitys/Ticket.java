@@ -30,18 +30,16 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@Table(name = "IRCTC_Ticket")
+@Table(name = "Yatra_Ticket")
 @Component
-public class FinalTicketResponse implements Cloneable {
+public class Ticket {
 	
 	@Id
-	@SequenceGenerator(name="logical_name", sequenceName = "irctc_sequence", allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "logical_name")
 	private Integer pnr;
 	@NonNull
-	private String booked_on=LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+	private String booked_on;
 	@NonNull
-	private String last_updated_on="not_updated";
+	private String last_updated_on;
 	@NonNull
 	private Integer train_no;
 	@NonNull
@@ -84,14 +82,8 @@ public class FinalTicketResponse implements Cloneable {
 	private String quota;
 	@NonNull
 	@XmlAttribute
-	private String provider="IRCTC";
+	private String provider;
 	@NonNull
 	@Embedded
 	private Passenger passenger;
-	
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
 }
