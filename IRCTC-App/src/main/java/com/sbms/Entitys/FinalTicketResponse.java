@@ -1,5 +1,6 @@
 package com.sbms.Entitys;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -32,8 +33,12 @@ import lombok.RequiredArgsConstructor;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Table(name = "IRCTC_Ticket")
 @Component
-public class FinalTicketResponse implements Cloneable {
+public class FinalTicketResponse implements Serializable,Cloneable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@SequenceGenerator(name="logical_name", sequenceName = "irctc_sequence", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "logical_name")

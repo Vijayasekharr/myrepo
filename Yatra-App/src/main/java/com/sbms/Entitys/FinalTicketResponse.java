@@ -1,5 +1,6 @@
 package com.sbms.Entitys;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -32,8 +33,12 @@ import lombok.RequiredArgsConstructor;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Table(name = "Yatra_Ticket")
 @Component
-public class Ticket {
+public class FinalTicketResponse implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	private Integer pnr;
 	@NonNull
@@ -86,4 +91,5 @@ public class Ticket {
 	@NonNull
 	@Embedded
 	private Passenger passenger;
+	
 }

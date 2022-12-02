@@ -100,6 +100,9 @@ public class TicketServiceImpl implements TicketServiceI {
 		
 		List<String> available_Stations_between_Two_Stations = trainRepository
 				.getAvailable_Stations_between_Two_Stations(trainId_At_From_Station, trainId_At_to_Station);
+		
+		available_Stations_between_Two_Stations.remove(from_station);
+		available_Stations_between_Two_Stations.remove(to_station);
 
 		return available_Stations_between_Two_Stations;
 	}
