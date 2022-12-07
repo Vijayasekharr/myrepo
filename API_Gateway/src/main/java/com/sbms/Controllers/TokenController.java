@@ -1,5 +1,7 @@
 package com.sbms.Controllers;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +25,7 @@ public class TokenController {
 
     @PostMapping("/getToken")
     public String generateToken(@RequestBody TokenRequest tokenRequest) throws Exception {
+  
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(tokenRequest.getUserName(), tokenRequest.getPassword())
