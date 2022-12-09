@@ -24,7 +24,7 @@ public class UtilityMethods {
 	@Autowired
 	TicketServiceImpl ticketServiceImpl;
 	
-	public HashMap<Integer, String> getAvailableTrainsBetweenTwoStations(String from_station, String to_station) {
+	public HashMap<Integer, String> getAvailableTrainsBetweenTwoStationsInOneWay(String from_station, String to_station) {
 		HashMap<Integer, String> availabletrains = new HashMap<>();
 		List<String> findTrainsAtFromStationWithoutFiltering = trainRepository
 				.findTrainsAtFromStationWithoutFiltering(from_station);
@@ -98,6 +98,33 @@ public class UtilityMethods {
 		train_Search_Responsejson.setCost_for_each_Quota(quota);
 		return train_Search_Responsejson;
 		
+	}
+	
+	public HashMap<Integer, String> getAvailableTrainsBetweenTwoStationsInTwoWay(String from_station, String to_station) {
+		HashMap<Integer, String> availabletrains = new HashMap<>();
+		List<Integer> findTrainNumbersAtFromStationWithoutFiltering = trainRepository
+				.findTrainNumbersAtFromStationWithoutFiltering(from_station);
+
+		List<Integer> findTrainNumbersToStationWithFiltering = trainRepository
+				.findTrainNumbersToStationWithFiltering(to_station, findTrainNumbersAtFromStationWithoutFiltering);
+
+		List<Integer> findTrainNumbersAtFromStationWithFiltering = trainRepository
+				.findTrainNumbersAtFromStationWithFiltering(from_station, findTrainNumbersToStationWithFiltering);
+
+		List<Integer> trainNumbersBetweenSelectedFromStationAndToStation = findTrainNumbersAtFromStationWithFiltering;
+		
+		System.out.println("The Available train numbers  between from "+ from_station + " to " + to_station
+				+ " is :: " + trainNumbersBetweenSelectedFromStationAndToStation);
+
+		for (Integer integer : trainNumbersBetweenSelectedFromStationAndToStation) {
+			System.out.println("Train Number :: "+integer);
+			String findTrainName = trainRepository.findTrainName(integer);
+			availabletrains.put(integer, findTrainName);
+		}
+		System.out.println("The Available train's  between from " + from_station + " to " + to_station
+				+ " is :: " + availabletrains);
+
+		return availabletrains;
 	}
 	
 	

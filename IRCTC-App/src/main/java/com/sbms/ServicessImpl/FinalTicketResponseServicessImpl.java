@@ -48,6 +48,8 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 
 	@Override
 	public FinalTicketResponse bookTicket(TicketRequest ticketRequest) {
+		
+		System.out.println("TicketRequest :: "+ticketRequest);
 
 		FinalTicketResponse finalTicketResponse = new FinalTicketResponse();
 
@@ -56,7 +58,9 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 		booking_info.setTo_station(ticketRequest.getTo_station());
 		booking_info.setTrain_no(ticketRequest.getTrain_no());
 		booking_info.setDate(ticketRequest.getDate());
-
+		
+		System.out.println("booking_info :: "+booking_info);
+		
 		/* Connecting to Train Application through Feign-Client */
 		InitialTicketResponse initialTicketResponse = feignClientToTrainApplication.bookTicket(booking_info);
 
@@ -136,7 +140,7 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 				+ finalTicketResponse1.getTo_station() + " is :: " + stationsList);
 
 		if (stationsList.contains(finalTicketResponse1.getBoarding_station())) {
-
+			
 			booking_info.setFrom_station(finalTicketResponse1.getFrom_station());
 			booking_info.setQuota(finalTicketResponse1.getQuota());
 			booking_info.setTo_station(finalTicketResponse1.getBoarding_station());

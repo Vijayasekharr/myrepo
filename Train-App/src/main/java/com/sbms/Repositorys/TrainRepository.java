@@ -50,7 +50,19 @@ public interface TrainRepository extends JpaRepository<Train, Integer> {
 	@Query(value="select distinct(station) from train where id BETWEEN :id1 and :id2", nativeQuery = true)
 	List<String> getAvailable_Stations_between_Two_Stations(Integer id1, Integer id2);
 	
+//	Two Ways
 	
+	@Query(value = "select train_no from Train where station=:station group by train_no",nativeQuery = true)
+	List<Integer> findTrainNumbersAtFromStationWithoutFiltering(String station);
+	
+	@Query(value = "select train_no from Train where station=:station and train_no in :listInteger group by train_no",nativeQuery = true)
+	List<Integer> findTrainNumbersToStationWithFiltering(String station, List<Integer> listInteger);
+	
+	@Query(value = "select train_no from Train where station=:station and train_no in :listInteger group by train_no",nativeQuery = true)
+	List<Integer> findTrainNumbersAtFromStationWithFiltering(String station,List<Integer> listInteger);
+	
+	@Query(value = "select train_name from Train where train_no=:trainnumber group by train_name",nativeQuery = true)
+	String findTrainName(Integer trainnumber);
 	
 	
 }

@@ -1,7 +1,5 @@
 package com.sbms.Entitys;
 
-import java.time.LocalDate;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.stereotype.Component;
