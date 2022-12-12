@@ -2,8 +2,6 @@ package com.sbms.Entitys;
 
 import java.util.List;
 
-import javax.persistence.Embedded;
-import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import lombok.Data;
@@ -24,12 +22,13 @@ public class TicketRequest {
 	@NonNull
 	private String to_station;
 	@NonNull
-	private String quota;
+	private String coach;
 	@NonNull
 	private String date;
 	@NonNull
-	@Embedded
-	private Passenger passenger;
+	private Address address;
+	@NonNull
+	private List<Passenger> passengers;
 	
 	
 }

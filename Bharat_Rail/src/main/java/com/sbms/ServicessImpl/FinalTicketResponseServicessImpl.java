@@ -54,7 +54,7 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 		FinalTicketResponse finalTicketResponse = new FinalTicketResponse();
 
 		booking_info.setFrom_station(ticketRequest.getFrom_station());
-		booking_info.setQuota(ticketRequest.getQuota());
+		booking_info.setCoach(ticketRequest.getCoach());
 		booking_info.setTo_station(ticketRequest.getTo_station());
 		booking_info.setTrain_no(ticketRequest.getTrain_no());
 		booking_info.setDate(ticketRequest.getDate());
@@ -92,9 +92,10 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 		finalTicketResponse.setTotal_dist_from_from_station(initialTicketResponse.getTotal_distance());
 		finalTicketResponse.setTotal_dist_from_boarding_station(initialTicketResponse.getTotal_distance());
 		finalTicketResponse.setCost(initialTicketResponse.getCost());
-		finalTicketResponse.setQuota(initialTicketResponse.getQuota());
+		finalTicketResponse.setCoach(initialTicketResponse.getCoach());
+		finalTicketResponse.setAddress(ticketRequest.getAddress());
 		
-		finalTicketResponse.setPassenger(ticketRequest.getPassenger());
+		finalTicketResponse.setPassengers(ticketRequest.getPassengers());
 
 		FinalTicketResponse save = finalTicketResponseRepository.save(finalTicketResponse);
 		return save;
@@ -121,12 +122,12 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 
 		stations_bw_TwoStations.setFrom_station(finalTicketResponse2.getBoarding_station());
 		stations_bw_TwoStations.setTo_station(finalTicketResponse1.getTo_station());
-		stations_bw_TwoStations.setQuota(finalTicketResponse1.getQuota());
+		stations_bw_TwoStations.setCoach(finalTicketResponse1.getCoach());
 		stations_bw_TwoStations.setTrain_no(finalTicketResponse1.getTrain_no());
 
 //			StationsList available_Stations_between_Two_Stations = feignClientToTrainApplication
 //					.getAvailable_Stations_between_Two_Stations(finalTicketResponse1.getFrom_station(),
-//							finalTicketResponse1.getTo_station(), finalTicketResponse1.getQuota(),
+//							finalTicketResponse1.getTo_station(), finalTicketResponse1.getCoach(),
 //							finalTicketResponse1.getTrain_no());
 
 		StationsList available_Stations_between_Two_Stations = feignClientToTrainApplication
@@ -142,7 +143,7 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 		if (stationsList.contains(finalTicketResponse1.getBoarding_station())) {
 			
 			booking_info.setFrom_station(finalTicketResponse1.getFrom_station());
-			booking_info.setQuota(finalTicketResponse1.getQuota());
+			booking_info.setCoach(finalTicketResponse1.getCoach());
 			booking_info.setTo_station(finalTicketResponse1.getBoarding_station());
 			booking_info.setTrain_no(finalTicketResponse1.getTrain_no());
 			booking_info.setDate(finalTicketResponse1.getFrom_date());

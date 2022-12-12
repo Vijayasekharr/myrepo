@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@Table(name = "IRCTC_Ticket")
+@Table(name = "Bharat_Rail_Ticket")
 @Component
 public class FinalTicketResponse implements Serializable,Cloneable {
 	
@@ -41,8 +42,9 @@ public class FinalTicketResponse implements Serializable,Cloneable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
-	@SequenceGenerator(name="logical_name", sequenceName = "irctc_sequence", allocationSize = 1)
+	@SequenceGenerator(name="logical_name", sequenceName = "Bharat_Rail", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "logical_name")
 	private Integer pnr;
 	@NonNull
@@ -88,13 +90,16 @@ public class FinalTicketResponse implements Serializable,Cloneable {
 	@NonNull
 	private Double cost;
 	@NonNull
-	private String quota;
+	private String coach;
 	@NonNull
 	@XmlAttribute
-	private String provider="IRCTC";
+	private String provider="Bharat Rail";
 	@Embedded
 	@NonNull
-	private Passenger passenger;
+	private Address address;
+	@OneToMany(cascade = CascadeType.ALL)
+	@NonNull
+	private List<Passenger> passengers;
 	
 	@Override
 	public Object clone() throws CloneNotSupportedException {
