@@ -52,7 +52,7 @@ public class TicketController {
 
 		booking_infojava.setDate(date);
 		booking_infojava.setFrom_station(booking_infojson.getFrom_station());
-		booking_infojava.setQuota(booking_infojson.getQuota());
+		booking_infojava.setCoach(booking_infojson.getCoach());
 		booking_infojava.setTo_station(booking_infojson.getTo_station());
 		booking_infojava.setTrain_no(booking_infojson.getTrain_no());
 
@@ -83,7 +83,7 @@ public class TicketController {
 				.setTo_date(ticketResponsejava.getTo_date().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 		ticketResponsejson.setTotal_journey_hours(ticketResponsejava.getTotal_journey_hours());
 		ticketResponsejson.setCost(ticketResponsejava.getCost());
-		ticketResponsejson.setQuota(ticketResponsejava.getQuota());
+		ticketResponsejson.setCoach(ticketResponsejava.getCoach());
 		ticketResponsejson.setTotal_distance(ticketResponsejava.getTotal_distance());
 
 		log.info("[ The bookTicket Request Processing by the TRAIN-APPLICATION which run's on the Port :: "
@@ -93,10 +93,10 @@ public class TicketController {
 
 	@GetMapping("/getAvailable_Stations_between_Two_Stations")
 	public ResponseEntity<StationsList> getAvailable_Stations_between_Two_Stations(@RequestParam String from_station,
-			@RequestParam String to_station, @RequestParam String quota, @RequestParam Integer train_no) {
+			@RequestParam String to_station, @RequestParam String coach, @RequestParam Integer train_no) {
 
 		List<String> available_Stations_between_Two_Stations = ticketServiceImpl
-				.getAvailable_Stations_between_Two_Stations(from_station.toUpperCase(), to_station.toUpperCase(), quota.toUpperCase(), train_no);
+				.getAvailable_Stations_between_Two_Stations(from_station.toUpperCase(), to_station.toUpperCase(), coach.toUpperCase(), train_no);
 		return new ResponseEntity<StationsList>(new StationsList(available_Stations_between_Two_Stations),
 				HttpStatus.OK);
 
@@ -109,7 +109,7 @@ public class TicketController {
 
 		ResponseEntity<StationsList> available_Stations_between_Two_Stations = this
 				.getAvailable_Stations_between_Two_Stations(stations_bw_TwoStations.getFrom_station().toUpperCase(),
-						stations_bw_TwoStations.getTo_station().toUpperCase(), stations_bw_TwoStations.getQuota().toUpperCase(),
+						stations_bw_TwoStations.getTo_station().toUpperCase(), stations_bw_TwoStations.getCoach().toUpperCase(),
 						stations_bw_TwoStations.getTrain_no());
 		return available_Stations_between_Two_Stations;
 

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sbms.Entitys.Availabe_Trains;
 import com.sbms.Entitys.Train;
+import com.sbms.Entitys.TrainCoachInfo;
 import com.sbms.Entitys.Train_Search_Request;
 import com.sbms.Entitys.Train_Search_Requestjson;
 import com.sbms.Entitys.Train_Search_Responsejson;
@@ -92,6 +93,19 @@ public class TrainController {
 		log.info("[ The train_search Request Processing by the TRAIN-APPLICATION which run's on the Port :: "+environment.getProperty("server.port") +" ]");
 		return new ResponseEntity<Availabe_Trains>(new Availabe_Trains(trains_Search) ,HttpStatus.OK);
 		
+	}
+	
+	
+	@GetMapping("/trainNumbers")
+	public ResponseEntity<List<Integer>> getTrainNumbers(){
+		List<Integer> trainNumbers = trainServiceImpl.getTrainNumbers();
+		return new ResponseEntity<List<Integer>>(trainNumbers,HttpStatus.OK);
+	}
+	
+	@PostMapping("coachInfoofTrains")
+	public ResponseEntity<List<TrainCoachInfo>> coachInfoofTrains(@RequestBody List<Integer> train_nos_list){
+		List<TrainCoachInfo> coachInfoofTrains = trainServiceImpl.coachInfoofTrains(train_nos_list);
+		return new ResponseEntity<List<TrainCoachInfo>>(coachInfoofTrains,HttpStatus.OK);
 	}
 
 }

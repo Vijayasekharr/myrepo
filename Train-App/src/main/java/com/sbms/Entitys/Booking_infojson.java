@@ -15,7 +15,7 @@ public class Booking_infojson {
 	private Integer train_no;
 	private String from_station;
 	private String to_station;
-	private String quota;
+	private String coach;
 	private String date;
 
 }

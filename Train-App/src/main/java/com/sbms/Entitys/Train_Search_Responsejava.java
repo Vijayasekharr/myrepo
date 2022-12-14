@@ -33,6 +33,6 @@ public class Train_Search_Responsejava {
 	@XmlAttribute
 	private String provider="IRCTC";
 	@Embedded
-	private Quota cost_for_each_Quota;
+	private Coach cost_for_each_Coach;
 	
 }

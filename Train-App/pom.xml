@@ -103,6 +103,38 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.2</version>
+                <configuration>
+                	<excludes>
+                		<exclude>**/com/sbms/RestApi01Application.class</exclude>
+                		<exclude>**/com/sbms/ServletInitializer.class</exclude>
+                		<exclude>**/com/sbms/configurations/**</exclude>
+                		<exclude>**/com/sbms/Entitys/**</exclude>
+                		<exclude>**/com/sbms/Exceptions/**</exclude>
+                		<exclude>**/com/sbms/Repositorys/**</exclude>
+                		<exclude>**/com/sbms/ServicesI/**</exclude>
+                	</excludes>
+                
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- <id>default-prepare-agent</id> -->
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 

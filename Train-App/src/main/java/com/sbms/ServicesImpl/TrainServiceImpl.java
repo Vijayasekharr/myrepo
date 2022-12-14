@@ -12,9 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sbms.Entitys.Booking_infojava;
-import com.sbms.Entitys.Quota;
+import com.sbms.Entitys.Coach;
 import com.sbms.Entitys.TicketResponsejava;
 import com.sbms.Entitys.Train;
+import com.sbms.Entitys.TrainCoachInfo;
 import com.sbms.Entitys.Train_Search_Request;
 import com.sbms.Entitys.Train_Search_Responsejava;
 import com.sbms.Entitys.Train_Search_Responsejson;
@@ -73,11 +74,11 @@ public class TrainServiceImpl implements TrainServiceI {
 
 			Train_Search_Responsejava train_Search_Responsejava = new Train_Search_Responsejava();
 			Train_Search_Responsejson train_Search_Responsejson = new Train_Search_Responsejson();
-			Quota quota = new Quota();
+			Coach coach = new Coach();
 
-			List<String> findAvailableQuotas = trainRepository.findAvailableQuotas(train_no);
-			System.out.println("Available quotas for the train :: " + train_no + " " + findAvailableQuotas);
-			findAvailableQuotas.forEach(e -> {
+			List<String> findAvailableCoachs = trainRepository.findAvailableCoachs(train_no);
+			System.out.println("Available coachs for the train :: " + train_no + " " + findAvailableCoachs);
+			findAvailableCoachs.forEach(e -> {
 				TicketResponsejava ticketResponsejava = ticketServiceImpl
 						.bookTicket(new Booking_infojava(train_no, train_Search_Request.getFrom_station(),
 								train_Search_Request.getTo_station(), e, train_Search_Request.getDate()));
@@ -94,28 +95,28 @@ public class TrainServiceImpl implements TrainServiceI {
 				train_Search_Responsejava.setTrain_no(ticketResponsejava.getTrain_no());
 
 				if (e.equals("GEN"))
-					quota.set_GEN_(ticketResponsejava.getCost() + "");
+					coach.set_GEN_(ticketResponsejava.getCost() + "");
 				else if (e.equals("2S"))
-					quota.set_2S_(ticketResponsejava.getCost() + "");
+					coach.set_2S_(ticketResponsejava.getCost() + "");
 				else if (e.equals("CC"))
-					quota.set_CC_(ticketResponsejava.getCost() + "");
+					coach.set_CC_(ticketResponsejava.getCost() + "");
 				else if (e.equals("SL"))
-					quota.set_SL_(ticketResponsejava.getCost() + "");
+					coach.set_SL_(ticketResponsejava.getCost() + "");
 				else if (e.equals("3AC"))
-					quota.set_3AC_(ticketResponsejava.getCost() + "");
+					coach.set_3AC_(ticketResponsejava.getCost() + "");
 				else if (e.equals("2AC"))
-					quota.set_2AC_(ticketResponsejava.getCost() + "");
+					coach.set_2AC_(ticketResponsejava.getCost() + "");
 				else if (e.equals("1AC"))
-					quota.set_1AC_(ticketResponsejava.getCost() + "");
+					coach.set_1AC_(ticketResponsejava.getCost() + "");
 
 				System.out.println(
-						"Quota = " + ticketResponsejava.getQuota() + " And Cost = " + ticketResponsejava.getCost());
+						"Coach = " + ticketResponsejava.getCoach() + " And Cost = " + ticketResponsejava.getCost());
 
 				train_Search_Responsejson.setArri_at_from_station(train_Search_Responsejava.getArri_at_from_station()
 						.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
 				train_Search_Responsejson.setArri_at_to_station(train_Search_Responsejava.getArri_at_to_station()
 						.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
-				train_Search_Responsejson.setCost_for_each_Quota(train_Search_Responsejava.getCost_for_each_Quota());
+				train_Search_Responsejson.setCost_for_each_Coach(train_Search_Responsejava.getCost_for_each_Coach());
 				train_Search_Responsejson.setDept_at_from_station(train_Search_Responsejava.getDept_at_from_station()
 						.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
 				train_Search_Responsejson.setDept_at_to_station(train_Search_Responsejava.getDept_at_to_station()
@@ -130,10 +131,10 @@ public class TrainServiceImpl implements TrainServiceI {
 				train_Search_Responsejson.setTrain_no(train_Search_Responsejava.getTrain_no());
 
 			});
-			train_Search_Responsejson.setCost_for_each_Quota(quota);
+			train_Search_Responsejson.setCost_for_each_Coach(coach);
 
 			/* Calling utility method */
-//			Train_Search_Responsejson train_Search_Responsejson2 = utilityMethods.setQuotaCost(train_Search_Request,train_Search_Responsejson , train_no);
+//			Train_Search_Responsejson train_Search_Responsejson2 = utilityMethods.setCoachCost(train_Search_Request,train_Search_Responsejson , train_no);
 			train_search_response_json_list.add(train_Search_Responsejson);
 //			train_search_response_json_list.add(train_Search_Responsejson2);
 		}
@@ -143,5 +144,49 @@ public class TrainServiceImpl implements TrainServiceI {
 				.collect(Collectors.toList());
 		return collect;
 
+	}
+
+	@Override
+	public List<Integer> getTrainNumbers() {
+		List<Integer> trainNumbers = trainRepository.getTrainNumbers();
+		return trainNumbers;
+	}
+
+	@Override
+	public List<TrainCoachInfo> coachInfoofTrains(List<Integer> train_nos_list) {
+
+		List<TrainCoachInfo> trainCoachInfoList = new ArrayList<>();
+
+		for (Integer integer : train_nos_list) {
+			
+			TrainCoachInfo trainCoachInfo = new TrainCoachInfo();
+
+			List<String> coachs = trainRepository.coachInfoofTrain(integer);
+			trainCoachInfo.setTrain_no(integer);
+			coachs.forEach(e -> {
+				if (e.equals("GEN")) {
+					trainCoachInfo.set_GEN_(1);
+				}else if (e.equals("2S")) {
+					trainCoachInfo.set_2S_(1);
+				}else if (e.equals("CC")) {
+					trainCoachInfo.set_CC_(1);
+				}
+				else if (e.equals("SL")) {
+					trainCoachInfo.set_SL_(1);
+				}else if (e.equals("3AC")) {
+					trainCoachInfo.set_3AC_(1);
+				}else if (e.equals("2AC")) {
+					trainCoachInfo.set_2AC_(1);
+				}else if (e.equals("1AC")) {
+					trainCoachInfo.set_1AC_(1);
+				}
+
+			});
+			
+			trainCoachInfoList.add(trainCoachInfo);
+
+		}
+
+		return trainCoachInfoList;
 	}
 }

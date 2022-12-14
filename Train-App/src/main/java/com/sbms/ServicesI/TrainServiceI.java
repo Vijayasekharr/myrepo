@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.sbms.Entitys.Train;
+import com.sbms.Entitys.TrainCoachInfo;
 import com.sbms.Entitys.Train_Search_Request;
 import com.sbms.Entitys.Train_Search_Responsejson;
 
@@ -18,5 +19,9 @@ public interface TrainServiceI {
 	public Optional<Train> findById(Integer id);
 	
 	public List<Train_Search_Responsejson> trains_Search(Train_Search_Request train_Search_Request);
+	
+	public List<Integer> getTrainNumbers();
+	
+	public List<TrainCoachInfo> coachInfoofTrains(List<Integer> train_no_list);
 
 }

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @XmlRootElement
 @Embeddable
-public class Quota {
+public class Coach {
 
 	private String _GEN_ = "Not Available";
 	private String _2S_ = "Not Available";

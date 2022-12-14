@@ -28,7 +28,7 @@ public class Train implements Serializable {
 	private Integer train_no;
 	private String train_name;
 	private String station;
-	private String quota;
+	private String coach;
 	private Double amount;
 	private LocalTime arrival;
 	private LocalTime departure;

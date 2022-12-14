@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sbms.Entitys.Booking_infojava;
-import com.sbms.Entitys.Quota;
+import com.sbms.Entitys.Coach;
 import com.sbms.Entitys.TicketResponsejava;
 import com.sbms.Entitys.TicketResponsejson;
 import com.sbms.Entitys.Train_Search_Request;
@@ -51,51 +51,51 @@ public class UtilityMethods {
 		return availabletrains;
 	}
 	
-	public Train_Search_Responsejson setQuotaCost(Train_Search_Request train_Search_Request,Train_Search_Responsejson train_Search_Responsejson, Integer train_no) {
+	public Train_Search_Responsejson setCoachCost(Train_Search_Request train_Search_Request,Train_Search_Responsejson train_Search_Responsejson, Integer train_no) {
 		
-		Quota quota = new Quota();
+		Coach coach = new Coach();
 		
 		try {
 			TicketResponsejava ticketResponsejava = ticketServiceImpl.bookTicket(new Booking_infojava(train_no, train_Search_Request.getFrom_station(),
 					train_Search_Request.getTo_station(), "GEN", train_Search_Request.getDate()));
-			quota.set_GEN_("Rs."+ticketResponsejava.getCost()+"");
+			coach.set_GEN_("Rs."+ticketResponsejava.getCost()+"");
 		} catch (Exception e) {
-			System.out.println("GEN Quota is not avilable for the train_name :: "+train_Search_Responsejson.getTrain_name()+" And train_no "+train_no);
+			System.out.println("GEN Coach is not avilable for the train_name :: "+train_Search_Responsejson.getTrain_name()+" And train_no "+train_no);
 		}
 		
 		try {
 			TicketResponsejava ticketResponsejava = ticketServiceImpl.bookTicket(new Booking_infojava(train_no, train_Search_Request.getFrom_station(),
 					train_Search_Request.getTo_station(), "SL", train_Search_Request.getDate()));
-			quota.set_SL_("Rs."+ticketResponsejava.getCost()+"");
+			coach.set_SL_("Rs."+ticketResponsejava.getCost()+"");
 		} catch (Exception e) {
-			System.out.println("SL Quota is not avilable for the train_name :: "+train_Search_Responsejson.getTrain_name()+" And train_no "+train_no);
+			System.out.println("SL Coach is not avilable for the train_name :: "+train_Search_Responsejson.getTrain_name()+" And train_no "+train_no);
 		}
 		
 		try {
 			TicketResponsejava ticketResponsejava = ticketServiceImpl.bookTicket(new Booking_infojava(train_no, train_Search_Request.getFrom_station(),
 					train_Search_Request.getTo_station(), "3AC", train_Search_Request.getDate()));
-			quota.set_3AC_("Rs."+ticketResponsejava.getCost()+"");
+			coach.set_3AC_("Rs."+ticketResponsejava.getCost()+"");
 		} catch (Exception e) {
-			System.out.println("3AC Quota is not avilable for the train_name :: "+train_Search_Responsejson.getTrain_name()+" And train_no "+train_no);
+			System.out.println("3AC Coach is not avilable for the train_name :: "+train_Search_Responsejson.getTrain_name()+" And train_no "+train_no);
 		}
 		
 		try {
 			TicketResponsejava ticketResponsejava = ticketServiceImpl.bookTicket(new Booking_infojava(train_no, train_Search_Request.getFrom_station(),
 					train_Search_Request.getTo_station(), "2AC", train_Search_Request.getDate()));
-			quota.set_2AC_("Rs."+ticketResponsejava.getCost()+"");
+			coach.set_2AC_("Rs."+ticketResponsejava.getCost()+"");
 		} catch (Exception e) {
-			System.out.println("2AC Quota is not avilable for the train_name :: "+train_Search_Responsejson.getTrain_name()+" And train_no "+train_no);
+			System.out.println("2AC Coach is not avilable for the train_name :: "+train_Search_Responsejson.getTrain_name()+" And train_no "+train_no);
 		}
 		
 		try {
 			TicketResponsejava ticketResponsejava = ticketServiceImpl.bookTicket(new Booking_infojava(train_no, train_Search_Request.getFrom_station(),
 					train_Search_Request.getTo_station(), "1AC", train_Search_Request.getDate()));
-			quota.set_1AC_("Rs."+ticketResponsejava.getCost()+"");
+			coach.set_1AC_("Rs."+ticketResponsejava.getCost()+"");
 		} catch (Exception e) {
-			System.out.println("1AC Quota is not avilable for the train_name :: "+train_Search_Responsejson.getTrain_name()+" And train_no "+train_no);
+			System.out.println("1AC Coach is not avilable for the train_name :: "+train_Search_Responsejson.getTrain_name()+" And train_no "+train_no);
 		}
 		
-		train_Search_Responsejson.setCost_for_each_Quota(quota);
+		train_Search_Responsejson.setCost_for_each_Coach(coach);
 		return train_Search_Responsejson;
 		
 	}

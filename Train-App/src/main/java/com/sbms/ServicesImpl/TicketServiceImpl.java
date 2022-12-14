@@ -27,10 +27,10 @@ public class TicketServiceImpl implements TicketServiceI {
 	public TicketResponsejava bookTicket(Booking_infojava booking_infojava) {
 		System.out.println("Booking_infojava object is :: " + booking_infojava);
 		Train findTrainAt_from_station = trainRepository.findTrainAt_from_station(
-				booking_infojava.getFrom_station().toUpperCase(), booking_infojava.getQuota().toUpperCase(),
+				booking_infojava.getFrom_station().toUpperCase(), booking_infojava.getCoach().toUpperCase(),
 				booking_infojava.getTrain_no());
 		Train findTrainAt_to_station = trainRepository.findTrainAt_to_station(
-				booking_infojava.getTo_station().toUpperCase(), booking_infojava.getQuota().toUpperCase(),
+				booking_infojava.getTo_station().toUpperCase(), booking_infojava.getCoach().toUpperCase(),
 				booking_infojava.getTrain_no());
 
 		System.out.println(findTrainAt_from_station);
@@ -53,7 +53,7 @@ public class TicketServiceImpl implements TicketServiceI {
 		ticketResponsejava.setDept_at_from_station(departuretime_at_fromstaton);
 		ticketResponsejava.setDept_at_to_station(departuretime_at_tostaton);
 		ticketResponsejava.setFrom_station(findTrainAt_from_station.getStation());
-		ticketResponsejava.setQuota(findTrainAt_from_station.getQuota());
+		ticketResponsejava.setCoach(findTrainAt_from_station.getCoach());
 		ticketResponsejava.setTo_station(findTrainAt_to_station.getStation());
 		ticketResponsejava.setTrain_no(booking_infojava.getTrain_no());
 		ticketResponsejava.setTotal_distance(total_distance + " KM");
@@ -92,11 +92,11 @@ public class TicketServiceImpl implements TicketServiceI {
 	}
 
 	@Override
-	public List<String> getAvailable_Stations_between_Two_Stations(String from_station, String to_station, String quota,
+	public List<String> getAvailable_Stations_between_Two_Stations(String from_station, String to_station, String coach,
 			Integer train_no) {
-		System.out.println("from_station : "+from_station+" :: "+"to_station : "+to_station+" :: "+"quota : "+quota+" :: "+" train_no :"+train_no);
-		Integer trainId_At_From_Station = trainRepository.getTrainId_At_From_Station(from_station, quota, train_no);
-		Integer trainId_At_to_Station = trainRepository.getTrainId_At_to_Station(to_station, quota, train_no);
+		System.out.println("from_station : "+from_station+" :: "+"to_station : "+to_station+" :: "+"coach : "+coach+" :: "+" train_no :"+train_no);
+		Integer trainId_At_From_Station = trainRepository.getTrainId_At_From_Station(from_station, coach, train_no);
+		Integer trainId_At_to_Station = trainRepository.getTrainId_At_to_Station(to_station, coach, train_no);
 		
 		List<String> available_Stations_between_Two_Stations = trainRepository
 				.getAvailable_Stations_between_Two_Stations(trainId_At_From_Station, trainId_At_to_Station);

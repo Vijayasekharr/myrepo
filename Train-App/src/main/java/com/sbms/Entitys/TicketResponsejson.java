@@ -51,6 +51,6 @@ public class TicketResponsejson {
 	@NonNull
 	private Double cost;
 	@NonNull
-	private String quota;
+	private String coach;
 	
 }
