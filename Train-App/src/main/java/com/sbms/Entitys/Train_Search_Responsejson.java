@@ -31,7 +31,7 @@ public class Train_Search_Responsejson {
 	private String total_journey_hours;
 	private String total_distance;
 	@XmlAttribute
-	private String provider="IRCTC";
+	private String provider="Bharat Rail";
 	@Embedded
 	private Coach cost_for_each_Coach;
 	

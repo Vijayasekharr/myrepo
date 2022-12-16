@@ -47,13 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 
-		http.authorizeRequests().antMatchers("/sbms/irctc/deleteTicket/**").hasAnyRole("ADMIN").and()
-			.authorizeRequests().antMatchers("/sbms/irctc/bookTicket").authenticated().and()
-			.authorizeRequests().antMatchers("/sbms/irctc/updateTicket").authenticated().and()
-			.authorizeRequests().antMatchers("/sbms/irctc/getTicket/**").authenticated().and()
-//			.authorizeRequests().antMatchers("/sbms/irctc/home").permitAll().and()
-			.authorizeRequests().antMatchers("/sbms/irctc/welcome").hasAnyRole("ADMIN").and()
-//			.authorizeRequests().antMatchers("/sbms/irctc/train_search").permitAll().and()
+		http.authorizeRequests().antMatchers("/sbms/bharat/deleteTicket/**").hasAnyRole("ADMIN").and()
+			.authorizeRequests().antMatchers("/sbms/bharat/bookTicket").authenticated().and()
+			.authorizeRequests().antMatchers("/sbms/bharat/updateTicket").authenticated().and()
+			.authorizeRequests().antMatchers("/sbms/bharat/getTicket/**").authenticated().and()
+//			.authorizeRequests().antMatchers("/sbms/bharat/home").permitAll().and()
+			.authorizeRequests().antMatchers("/sbms/bharat/welcome").hasAnyRole("ADMIN").and()
+//			.authorizeRequests().antMatchers("/sbms/bharat/train_search").permitAll().and()
 			.formLogin().and()
 			.httpBasic().and()
 			.exceptionHandling().and()

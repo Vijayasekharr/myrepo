@@ -80,7 +80,9 @@ public class Ticket_ServicesImpl implements Ticket_ServicesI {
 		ResponseEntity<FinalTicketResponse> exchange = restTemplate.exchange(URL, HttpMethod.PUT, httpEntity,
 				FinalTicketResponse.class);
 		FinalTicketResponse body = exchange.getBody();
+		body.setProvider("Traveller");
 		FinalTicketResponse save = ticketRepository.save(body);
+		
 
 		return save;
 	}

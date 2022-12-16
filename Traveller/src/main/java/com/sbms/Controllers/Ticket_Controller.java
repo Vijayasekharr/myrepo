@@ -51,7 +51,7 @@ public class Ticket_Controller {
 		FinalTicketResponse ticket = ticket_ServicesI.bookTicket(ticketRequest);
 		log.info("[ The bookTicket Request Processing by the Traveller-APPLICATION which run's on the Port :: "
 				+ environment.getProperty("server.port") + " ]");
-		return new ResponseEntity<FinalTicketResponse>(ticket, HttpStatus.FOUND);
+		return new ResponseEntity<FinalTicketResponse>(ticket, HttpStatus.CREATED);
 
 	}
 

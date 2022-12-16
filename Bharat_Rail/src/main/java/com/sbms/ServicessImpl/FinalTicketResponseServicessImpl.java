@@ -13,10 +13,14 @@ import org.springframework.stereotype.Service;
 import com.sbms.Entitys.Booking_info;
 import com.sbms.Entitys.FinalTicketResponse;
 import com.sbms.Entitys.InitialTicketResponse;
+import com.sbms.Entitys.Passenger;
+import com.sbms.Entitys.SeatBookingRequest;
+import com.sbms.Entitys.SeatBookingResponse;
 import com.sbms.Entitys.StationsList;
 import com.sbms.Entitys.Stations_bw_TwoStations;
 import com.sbms.Entitys.TicketRequest;
 import com.sbms.Entitys.Updated_Booking_infojson;
+import com.sbms.FeignClients.FeignClientToTSeatingInfoApplication;
 import com.sbms.FeignClients.FeignClientToTrainApplication;
 import com.sbms.Repositorys.FinalTicketResponseRepository;
 import com.sbms.ServicessI.FinalTicketResponseServicessI;
@@ -33,6 +37,9 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 
 	@Autowired
 	Stations_bw_TwoStations stations_bw_TwoStations;
+	
+	@Autowired
+	SeatBookingRequest seatBookingRequest;
 
 //	@Autowired
 //	FinalTicketResponse finalTicketResponse;
@@ -45,6 +52,9 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 
 	@Autowired
 	FeignClientToTrainApplication feignClientToTrainApplication;
+	
+	@Autowired
+	FeignClientToTSeatingInfoApplication feignClientToTSeatingInfoApplication;
 
 	@Override
 	public FinalTicketResponse bookTicket(TicketRequest ticketRequest) {
@@ -92,12 +102,25 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 		finalTicketResponse.setTotal_dist_from_from_station(initialTicketResponse.getTotal_distance());
 		finalTicketResponse.setTotal_dist_from_boarding_station(initialTicketResponse.getTotal_distance());
 		finalTicketResponse.setCost(initialTicketResponse.getCost());
+		finalTicketResponse.setQuota(ticketRequest.getQuota());
 		finalTicketResponse.setCoach(initialTicketResponse.getCoach());
 		finalTicketResponse.setAddress(ticketRequest.getAddress());
-		
 		finalTicketResponse.setPassengers(ticketRequest.getPassengers());
-
 		FinalTicketResponse save = finalTicketResponseRepository.save(finalTicketResponse);
+		
+		seatBookingRequest.setCoach(save.getCoach());
+		seatBookingRequest.setPassengers(save.getPassengers());
+		seatBookingRequest.setPnr(save.getPnr());
+		seatBookingRequest.setQuota(save.getQuota());
+		seatBookingRequest.setOn_date(save.getFrom_date());
+		seatBookingRequest.setTrain_no(save.getTrain_no());
+		
+		System.out.println("seatBookingRequest :: "+seatBookingRequest);
+		
+//		Calling to the Seating information App
+//		List<Passenger> passengerSeatBookingList = feignClientToTSeatingInfoApplication.seatBooking(seatBookingRequest);
+//		System.out.println("passengerSeatBookingList :: "+passengerSeatBookingList);
+		
 		return save;
 	}
 

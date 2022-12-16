@@ -90,6 +90,8 @@ public class FinalTicketResponse implements Serializable,Cloneable {
 	@NonNull
 	private Double cost;
 	@NonNull
+	private String quota;
+	@NonNull
 	private String coach;
 	@NonNull
 	@XmlAttribute

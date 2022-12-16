@@ -26,6 +26,7 @@ public class Passenger {
 	private String name;
 	private String gender;
 	private Integer age;
-	
-
+	private String berth_type;
+//	private String coach_no;
+//	private Integer seat_no;
 }

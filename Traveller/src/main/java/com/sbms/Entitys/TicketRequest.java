@@ -23,6 +23,8 @@ public class TicketRequest {
 	@NonNull
 	private String to_station;
 	@NonNull
+	private String quota;
+	@NonNull
 	private String coach;
 	@NonNull
 	private String date;

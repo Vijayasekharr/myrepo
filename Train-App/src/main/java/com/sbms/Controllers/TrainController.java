@@ -89,7 +89,9 @@ public class TrainController {
 		train_Search_Requestjava.setDate(date);
 		train_Search_Requestjava.setFrom_station(train_Search_Requestjson.getFrom_station());
 		train_Search_Requestjava.setTo_station(train_Search_Requestjson.getTo_station());
+		
 		List<Train_Search_Responsejson> trains_Search = trainServiceImpl.trains_Search(train_Search_Requestjava);
+		
 		log.info("[ The train_search Request Processing by the TRAIN-APPLICATION which run's on the Port :: "+environment.getProperty("server.port") +" ]");
 		return new ResponseEntity<Availabe_Trains>(new Availabe_Trains(trains_Search) ,HttpStatus.OK);
 		

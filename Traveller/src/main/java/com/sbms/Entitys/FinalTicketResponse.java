@@ -87,6 +87,8 @@ public class FinalTicketResponse implements Serializable{
 	@NonNull
 	private Double cost;
 	@NonNull
+	private String quota;
+	@NonNull
 	private String coach;
 	@NonNull
 	@XmlAttribute

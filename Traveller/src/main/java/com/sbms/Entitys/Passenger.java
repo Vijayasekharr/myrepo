@@ -23,11 +23,14 @@ import lombok.NoArgsConstructor;
 @Table(name="Traveller_Passenger")
 public class Passenger {
 	@Id
-	@SequenceGenerator(name = "logical_name", sequenceName = "Traveller_Passenger_seq")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "logical_name")
+//	@SequenceGenerator(name = "logical_name", sequenceName = "Traveller_Passenger_seq")
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "logical_name")
 	private Integer id;
 	private String name;
 	private String gender;
 	private Integer age;
+	private String berth_type;
+//	private String coach_no;
+//	private Integer seat_no;
 	
 }
