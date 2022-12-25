@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor 
 @Component
-public class Booking_infojava {
+public class TicketRequest {
 	
 	private Integer train_no;
 	private String from_station;
 	private String to_station;
 	private String coach;
-	private LocalDate date;
+	private String date;
 
 }

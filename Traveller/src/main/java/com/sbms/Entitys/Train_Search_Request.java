@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @XmlRootElement
-public class Train_Search_Requestjson {
+public class Train_Search_Request {
 	private String from_station;
 	private String to_station;
 	private String date; 

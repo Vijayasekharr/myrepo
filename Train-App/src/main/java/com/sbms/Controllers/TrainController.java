@@ -1,14 +1,8 @@
 package com.sbms.Controllers;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-import javax.activation.DataSource;
-
-import org.aspectj.weaver.NewConstructorTypeMunger;
-import org.bouncycastle.crypto.engines.ISAACEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -20,14 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sbms.Entitys.Availabe_Trains;
 import com.sbms.Entitys.Train;
 import com.sbms.Entitys.TrainCoachInfo;
 import com.sbms.Entitys.Train_Search_Request;
-import com.sbms.Entitys.Train_Search_Requestjson;
-import com.sbms.Entitys.Train_Search_Responsejson;
+import com.sbms.Entitys.Train_Search_Response;
 import com.sbms.Entitys.Trains;
-import com.sbms.ServicesI.TrainServiceI;
 import com.sbms.ServicesImpl.TrainServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +34,9 @@ public class TrainController {
 	
 	@Autowired
 	Environment environment;	
+	
+	@Autowired
+	Availabe_Trains availabe_Trains;
 	
 	@PostMapping(value = "/saveTrain", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<String> saveTrain(@RequestBody Train train){
@@ -81,19 +77,12 @@ public class TrainController {
 	
 	
 	@PostMapping("/train_search")
-	public ResponseEntity<Availabe_Trains> trains_Search(@RequestBody Train_Search_Requestjson train_Search_Requestjson) {
-		log.info("The trains between "+train_Search_Requestjson.getFrom_station()+" and "+train_Search_Requestjson.getTo_station()+" is  processing by "+ "TrainController of Train-Application");
-		System.out.println("Train_Search_Responsejson ISAACEngine :: " +train_Search_Requestjson);
-		LocalDate date = LocalDate.parse(train_Search_Requestjson.getDate(),DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-		Train_Search_Request train_Search_Requestjava = new Train_Search_Request();
-		train_Search_Requestjava.setDate(date);
-		train_Search_Requestjava.setFrom_station(train_Search_Requestjson.getFrom_station());
-		train_Search_Requestjava.setTo_station(train_Search_Requestjson.getTo_station());
-		
-		List<Train_Search_Responsejson> trains_Search = trainServiceImpl.trains_Search(train_Search_Requestjava);
+	public ResponseEntity<Availabe_Trains> trains_Search(@RequestBody Train_Search_Request train_Search_Request) throws JsonProcessingException {
+		List<Train_Search_Response> trains_Search = trainServiceImpl.trains_Search(train_Search_Request);
+		availabe_Trains.setAvailable_Trains_List(trains_Search);
 		
 		log.info("[ The train_search Request Processing by the TRAIN-APPLICATION which run's on the Port :: "+environment.getProperty("server.port") +" ]");
-		return new ResponseEntity<Availabe_Trains>(new Availabe_Trains(trains_Search) ,HttpStatus.OK);
+		return new ResponseEntity<Availabe_Trains>(availabe_Trains,HttpStatus.OK);
 		
 	}
 	

@@ -88,12 +88,12 @@ public class Ticket_ServicesImpl implements Ticket_ServicesI {
 	}
 
 	@Override
-	public StationsList getAvailable_Stations_between_Two_Stations(String from_station, String to_station, String coach,
+	public StationsList getAvailable_Stations_between_Two_Stations(String from_station, String to_station,
 			Integer train_no) {
 
 		/* Connecting to bharat-Application through WebClient */
 		String URL = "swapna:2000/sbms/train/getAvailable_Stations_between_Two_Stations?from_station=" + from_station
-				+ "&to_station=" + to_station + "&coach=" + coach + "&train_no=" + train_no;
+				+ "&to_station=" + to_station + "&train_no=" + train_no;
 		StationsList stationsList = WebClient.create().get().uri(URL)
 //				.headers(headers -> headers.setBasicAuth("yatra", "yatra123"))
 				.retrieve().bodyToMono(StationsList.class).block();

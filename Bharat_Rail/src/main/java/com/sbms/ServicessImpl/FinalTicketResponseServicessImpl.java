@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +39,7 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 
 	@Autowired
 	Stations_bw_TwoStations stations_bw_TwoStations;
-	
+
 	@Autowired
 	SeatBookingRequest seatBookingRequest;
 
@@ -52,14 +54,15 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 
 	@Autowired
 	FeignClientToTrainApplication feignClientToTrainApplication;
-	
+
 	@Autowired
 	FeignClientToTSeatingInfoApplication feignClientToTSeatingInfoApplication;
 
 	@Override
+	@Transactional
 	public FinalTicketResponse bookTicket(TicketRequest ticketRequest) {
-		
-		System.out.println("TicketRequest :: "+ticketRequest);
+
+		System.out.println("TicketRequest :: " + ticketRequest);
 
 		FinalTicketResponse finalTicketResponse = new FinalTicketResponse();
 
@@ -68,9 +71,9 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 		booking_info.setTo_station(ticketRequest.getTo_station());
 		booking_info.setTrain_no(ticketRequest.getTrain_no());
 		booking_info.setDate(ticketRequest.getDate());
-		
-		System.out.println("booking_info :: "+booking_info);
-		
+
+		System.out.println("booking_info :: " + booking_info);
+
 		/* Connecting to Train Application through Feign-Client */
 		InitialTicketResponse initialTicketResponse = feignClientToTrainApplication.bookTicket(booking_info);
 
@@ -107,21 +110,25 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 		finalTicketResponse.setAddress(ticketRequest.getAddress());
 		finalTicketResponse.setPassengers(ticketRequest.getPassengers());
 		FinalTicketResponse save = finalTicketResponseRepository.save(finalTicketResponse);
-		
+
 		seatBookingRequest.setCoach(save.getCoach());
 		seatBookingRequest.setPassengers(save.getPassengers());
 		seatBookingRequest.setPnr(save.getPnr());
 		seatBookingRequest.setQuota(save.getQuota());
 		seatBookingRequest.setOn_date(save.getFrom_date());
 		seatBookingRequest.setTrain_no(save.getTrain_no());
-		
-		System.out.println("seatBookingRequest :: "+seatBookingRequest);
-		
+
+		System.out.println("seatBookingRequest :: " + seatBookingRequest);
+
 //		Calling to the Seating information App
-//		List<Passenger> passengerSeatBookingList = feignClientToTSeatingInfoApplication.seatBooking(seatBookingRequest);
-//		System.out.println("passengerSeatBookingList :: "+passengerSeatBookingList);
+		List<Passenger> seatBooking = feignClientToTSeatingInfoApplication.seatBooking(seatBookingRequest);
+		System.out.println("passengerSeatBookingList :: "+seatBooking);
 		
-		return save;
+		save.setPassengers(seatBooking);
+		
+		FinalTicketResponse save2 = finalTicketResponseRepository.save(save);
+
+		return save2;
 	}
 
 	@Override
@@ -145,13 +152,11 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 
 		stations_bw_TwoStations.setFrom_station(finalTicketResponse2.getBoarding_station());
 		stations_bw_TwoStations.setTo_station(finalTicketResponse1.getTo_station());
-		stations_bw_TwoStations.setCoach(finalTicketResponse1.getCoach());
 		stations_bw_TwoStations.setTrain_no(finalTicketResponse1.getTrain_no());
 
-//			StationsList available_Stations_between_Two_Stations = feignClientToTrainApplication
-//					.getAvailable_Stations_between_Two_Stations(finalTicketResponse1.getFrom_station(),
-//							finalTicketResponse1.getTo_station(), finalTicketResponse1.getCoach(),
-//							finalTicketResponse1.getTrain_no());
+//		StationsList available_Stations_between_Two_Stations = feignClientToTrainApplication
+//				.getAvailable_Stations_between_Two_Stations(finalTicketResponse1.getFrom_station(),
+//						finalTicketResponse1.getTo_station(), finalTicketResponse1.getTrain_no());
 
 		StationsList available_Stations_between_Two_Stations = feignClientToTrainApplication
 				.getAvailable_Stations_between_Two_Stations(stations_bw_TwoStations);
@@ -164,7 +169,7 @@ public class FinalTicketResponseServicessImpl implements FinalTicketResponseServ
 				+ finalTicketResponse1.getTo_station() + " is :: " + stationsList);
 
 		if (stationsList.contains(finalTicketResponse1.getBoarding_station())) {
-			
+
 			booking_info.setFrom_station(finalTicketResponse1.getFrom_station());
 			booking_info.setCoach(finalTicketResponse1.getCoach());
 			booking_info.setTo_station(finalTicketResponse1.getBoarding_station());

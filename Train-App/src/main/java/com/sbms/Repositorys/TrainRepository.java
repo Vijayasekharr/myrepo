@@ -41,11 +41,11 @@ public interface TrainRepository extends JpaRepository<Train, Integer> {
 	@Query(value="select coach from Train where train_no=:integer group by coach", nativeQuery = true)
 	List<String> findAvailableCoachs(Integer integer);
 	
-	@Query(value="select id from Train where station=:from_station and coach=:coach and train_no=:train_no", nativeQuery = true)
-	Integer getTrainId_At_From_Station(String from_station,String coach, Integer train_no);
+	@Query(value="select max(id) from Train where station=:from_station and train_no=:train_no", nativeQuery = true)
+	Integer getTrainId_At_From_Station(String from_station, Integer train_no);
 	
-	@Query(value="select id from Train where station=:to_station and coach=:coach and train_no=:train_no", nativeQuery = true)
-	Integer getTrainId_At_to_Station(String to_station, String coach, Integer train_no);
+	@Query(value="select min(id) from Train where station=:to_station and train_no=:train_no", nativeQuery = true)
+	Integer getTrainId_At_to_Station(String to_station, Integer train_no);
 	
 	@Query(value="select distinct(station) from train where id BETWEEN :id1 and :id2", nativeQuery = true)
 	List<String> getAvailable_Stations_between_Two_Stations(Integer id1, Integer id2);
@@ -71,6 +71,13 @@ public interface TrainRepository extends JpaRepository<Train, Integer> {
 	List<String> coachInfoofTrain(Integer train_no);
 	
 	
+//	Second Time Development
+	
+	@Query("from Train where station=:from_station and train_no=:train_no")
+	List<Train> findTrains_At_from_station(String from_station, Integer train_no);
+	
+	@Query("from Train where station=:to_station and train_no=:train_no")
+	List<Train> findTrains_At_to_station(String to_station, Integer train_no);
 	
 	
 }

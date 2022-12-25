@@ -77,19 +77,7 @@ public class FinalTicketResponse_Controller {
 		}
 		return new ResponseEntity<String>("Invalid pnr number !!!!!!!", HttpStatus.BAD_REQUEST);	
 	}
-	@PutMapping("/yatra_updateTicket")
-	public Object yatra_updateTicket(@RequestBody FinalTicketResponse finalTicketResponse) throws CloneNotSupportedException {
-		System.out.println("/yatra_updateTicket URL is called");
-		ResponseEntity responseEntity = this.updateTicket(finalTicketResponse);
-		Object object = responseEntity.getBody();
-		if (object instanceof String) {
-			return new ResponseEntity<Object>(object, HttpStatus.OK);
-		}
-		return new ResponseEntity<FinalTicketResponse>((FinalTicketResponse)object, HttpStatus.OK);
-	}
-	
-	
-	
+
 	@GetMapping("/getTicket/{pnr}")
 	public ResponseEntity getTicket(@PathVariable Integer pnr){
 		Optional<FinalTicketResponse> ticket = finalTicketResponseServicessI.getTicket(pnr);
@@ -102,11 +90,10 @@ public class FinalTicketResponse_Controller {
 	
 	@GetMapping("/getAvailable_Stations_between_Two_Stations")
 	public ResponseEntity<StationsList> getAvailable_Stations_between_Two_Stations(@RequestParam String from_station,
-			@RequestParam String to_station, @RequestParam String coach, @RequestParam Integer train_no) {
+			@RequestParam String to_station, @RequestParam Integer train_no) {
 
 		stations_bw_TwoStations.setFrom_station(from_station);
 		stations_bw_TwoStations.setTo_station(to_station);
-		stations_bw_TwoStations.setCoach(coach);
 		stations_bw_TwoStations.setTrain_no(train_no);
 		
 		StationsList available_Stations_between_Two_Stations = finalTicketResponseServicessI.getAvailable_Stations_between_Two_Stations(stations_bw_TwoStations);
@@ -114,8 +101,4 @@ public class FinalTicketResponse_Controller {
 		return new ResponseEntity<StationsList>(available_Stations_between_Two_Stations, HttpStatus.OK);
 
 	}
-	
-	
-	
-	
 }

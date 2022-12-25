@@ -2,13 +2,13 @@ package com.sbms.ServicesI;
 
 import java.util.List;
 
-import com.sbms.Entitys.Booking_infojava;
-import com.sbms.Entitys.TicketResponsejava;
+import com.sbms.Entitys.TicketRequest;
+import com.sbms.Entitys.TicketResponse;
 
 public interface TicketServiceI {
 	
-	public TicketResponsejava bookTicket(Booking_infojava booking_info);
+	public TicketResponse bookTicket(TicketRequest booking_info);
 	
-	public List<String> getAvailable_Stations_between_Two_Stations(String from_station,String to_station,String coach,Integer train_no);
+	public List<String> getAvailable_Stations_between_Two_Stations(String from_station,String to_station,Integer train_no);
 	
 }

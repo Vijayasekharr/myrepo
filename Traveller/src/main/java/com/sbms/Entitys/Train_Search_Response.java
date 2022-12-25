@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Train_Search_Responsejson {
+public class Train_Search_Response {
 
 	private Integer train_no;
 	private String train_name;
@@ -28,7 +28,7 @@ public class Train_Search_Responsejson {
 	private String total_journey_hours;
 	private String total_distance;
 	@XmlAttribute
-	private String provider="Bharat Rail";
+	private String provider="Traveller";
 	@Embedded
 	private Coach cost_for_each_Coach;
 	

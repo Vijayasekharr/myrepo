@@ -17,5 +17,5 @@ import lombok.NoArgsConstructor;
 public class Train_Search_Request {
 	private String from_station;
 	private String to_station;
-	private LocalDate date; 
+	private String date; 
 }

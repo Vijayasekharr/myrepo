@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.sbms.Entitys.Availabe_Trains;
-import com.sbms.Entitys.Train_Search_Requestjson;
+import com.sbms.Entitys.Train_Search_Request;
 import com.sbms.ServicesI.Train_ServicesI;
 
 @Service

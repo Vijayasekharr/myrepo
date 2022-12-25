@@ -12,6 +12,6 @@ public interface Ticket_ServicesI {
 
 	public FinalTicketResponse updateTicket(FinalTicketResponse ticket);
 
-	public StationsList getAvailable_Stations_between_Two_Stations(String from_station, String to_station, String coach,Integer train_no);
+	public StationsList getAvailable_Stations_between_Two_Stations(String from_station, String to_station, Integer train_no);
 
 }

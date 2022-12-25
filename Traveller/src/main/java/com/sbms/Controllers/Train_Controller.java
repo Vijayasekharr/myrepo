@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sbms.Entitys.Availabe_Trains;
-import com.sbms.Entitys.Train_Search_Requestjson;
+import com.sbms.Entitys.Train_Search_Request;
 import com.sbms.ServicesI.Train_ServicesI;
 
 import lombok.extern.slf4j.Slf4j;

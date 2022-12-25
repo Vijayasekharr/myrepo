@@ -68,10 +68,10 @@ public class Ticket_Controller {
 
 	@GetMapping("/getAvailable_Stations_between_Two_Stations")
 	public ResponseEntity<StationsList> getAvailable_Stations_between_Two_Stations(@RequestParam String from_station,
-			@RequestParam String to_station, @RequestParam String coach, @RequestParam Integer train_no) {
+			@RequestParam String to_station, @RequestParam Integer train_no) {
 
 		StationsList available_Stations_between_Two_Stations = ticket_ServicesI.getAvailable_Stations_between_Two_Stations(from_station,
-				to_station, coach,train_no);
+				to_station, train_no);
 		return new ResponseEntity<StationsList>(available_Stations_between_Two_Stations, HttpStatus.OK);
 		
 		
@@ -88,7 +88,7 @@ public class Ticket_Controller {
 		if (body1 instanceof FinalTicketResponse) {
 			
 			FinalTicketResponse ticket2 = (FinalTicketResponse) body1;
-			ResponseEntity<StationsList> available_Stations_between_Two_Stations = this.getAvailable_Stations_between_Two_Stations(ticket2.getBoarding_station(), ticket1.getTo_station(), ticket1.getCoach(), ticket1.getTrain_no());
+			ResponseEntity<StationsList> available_Stations_between_Two_Stations = this.getAvailable_Stations_between_Two_Stations(ticket2.getBoarding_station(), ticket1.getTo_station(), ticket1.getTrain_no());
 			StationsList body2 = available_Stations_between_Two_Stations.getBody();
 			List<String> stationsList = body2.getStationsList();
 			if (stationsList.contains(ticket1.getBoarding_station())) {

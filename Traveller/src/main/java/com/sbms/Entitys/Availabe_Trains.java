@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 @XmlRootElement
 public class Availabe_Trains {
 
-	List<Train_Search_Responsejson> Available_Trains_List;
+	List<Train_Search_Response> Available_Trains_List;
 
 }
